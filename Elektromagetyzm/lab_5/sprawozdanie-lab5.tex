@@ -26,6 +26,11 @@
 \usepackage{booktabs}
 \usepackage{float}
 \usepackage{longtable}
+\makeatletter
+\setlength{\@fptop}{0pt}
+\setlength{\@fpsep}{14pt plus 1fil}
+\setlength{\@fpbot}{0pt plus 1fil}
+\makeatother
 \usepackage{caption}
 \usepackage{multirow}
 \usepackage{array}
@@ -41,14 +46,14 @@
 \definecolor{seriaD}{HTML}{E07B00}   % pomaranczowy -- 74270044, 2 zwoje
 \pgfplotsset{
   wykres/.style={
-    width=1.0\textwidth, height=8cm, grid=major,
+    width=19cm, height=15.5cm, grid=major,
     grid style={line width=0.2pt, draw=gray!18},
     major grid style={line width=0.35pt, draw=gray!30},
     xlabel={Częstotliwość $f$ [MHz]},
     legend pos=north west, legend cell align=left, legend columns=2,
     legend style={font=\small, fill=white, draw=gray!40,
                   /tikz/every even column/.append style={column sep=1.2em}},
-    enlarge y limits={upper, value=0.32},   % zapas u gory pod legende
+    enlarge y limits={upper, value=0.14},   % zapas u gory pod legende
     title style={font=\small, yshift=0.2em},
     unbounded coords=jump, tick label style={font=\small},
     label style={font=\small}
@@ -216,9 +221,10 @@ z~instrukcją.
 
 Rdzenie z~podwójnym uzwojeniem były przygotowane fabrycznie na stanowisku.
 Niepewność graniczną odczytu poziomu sygnału na analizatorze przyjęto jako
-$\pm 0{,}5\ \mathrm{dB}$ (rozdzielczość odczytu markera), natomiast rozrzut
-kolejnych przebiegów referencyjnych, wynikający z~niepowtarzalności geometrii
-toru, sięgał $\pm 2\ \mathrm{dB}$ w~zakresie powyżej $300\ \mathrm{MHz}$.
+$\pm 0{,}5\ \mathrm{dB}$ (rozdzielczość odczytu markera). Drugim źródłem niepewności
+jest niepowtarzalność geometrii toru między kolejnymi zestawieniami układu. Jej skutek
+oszacowano na $\pm 2\ \mathrm{dB}$ powyżej $300\ \mathrm{MHz}$, porównując
+charakterystykę referencyjną z~przebiegami zarejestrowanymi automatycznie.
 
 \subsubsection{Opis konfiguracji}
 
@@ -322,6 +328,7 @@ w~plikach:
   \item \texttt{pojedynczy\_74270044.csv}, \texttt{podwojny\_74270044.csv}.
 \end{itemize}
 
+
 \subsection{Wyznaczenie tłumienności badanych elementów}
 
 Tłumienność badanego elementu wyznaczono jako różnicę poziomów sygnału zmierzonych
@@ -333,7 +340,7 @@ A\,[\mathrm{dB}] = \left| U_2\,[\mathrm{dB\mu V}] - U_1\,[\mathrm{dB\mu V}] \rig
 gdzie $U_1$ --- napięcie zmierzone w~układzie referencyjnym,
 $U_2$ --- napięcie w~układzie z~badanym elementem. W~tabelach podano wartości
 ze znakiem, tj. $A = U_1 - U_2$: wartości dodatnie oznaczają rzeczywiste tłumienie
-wnoszone przez rdzeń, natomiast nieliczne wartości ujemnu są skutkiem niepewności pomiaru
+wnoszone przez rdzeń, natomiast nieliczne wartości ujemne są skutkiem niepewności pomiaru
 oraz zjawisk rezonansowych w~torze, a~nie wzmocnienia sygnału --- dla takich punktów
 impedancji nie wyznaczano (oznaczenie „---” w~tabelach).
 
@@ -344,7 +351,7 @@ niepewność powyżej $300\ \mathrm{MHz}$, gdzie referencja silnie faluje.
 
 \subsection{Obliczenie impedancji badanych elementów}
 
-Impedancję badanego elementu wyznaczono z~zmierzonej tłumienności:
+Impedancję badanego elementu wyznaczono ze~zmierzonej tłumienności:
 \begin{equation}
 Z_B = \left( 10^{\frac{A}{20}} - 1 \right)\left( Z_g + Z_L \right),
 \label{eq:impedancja}
@@ -450,8 +457,9 @@ nie niższy niż w~układzie referencyjnym. Taki wynik nie odpowiada tłumieniu 
 przez rdzeń, więc impedancji dla niego nie wyznaczano (oznaczenie „---” w~tabeli).
 W~tabelach podano wartości zaokrąglone.
 
-\begin{figure}[H]
+\begin{figure}[htb]
   \centering
+  \makebox[\textwidth][c]{%
   \begin{tikzpicture}
     \begin{axis}[wykres, xmode=log, ylabel={Tłumienność $A$ [dB]},
                  title={Tłumienność rdzenia 74270043 --- pomiar ręczny}]
@@ -461,13 +469,14 @@ W~tabelach podano wartości zaokrąglone.
       \addlegendentry{74270043 --- 2 zwoje}
       \draw[gray, dotted] (axis cs:1,0) -- (axis cs:1000,0);
     \end{axis}
-  \end{tikzpicture}
+  \end{tikzpicture}}
   \caption{Tłumienność rdzenia 74270043 w~funkcji częstotliwości --- pomiar ręczny.}
   \label{fig:reczny-A}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htb]
   \centering
+  \makebox[\textwidth][c]{%
   \begin{tikzpicture}
     \begin{axis}[wykres, xmode=log, ymode=log, ylabel={Impedancja $Z_B$ [$\Omega$]},
                  title={Impedancja rdzenia 74270043 --- pomiar ręczny}]
@@ -476,7 +485,7 @@ W~tabelach podano wartości zaokrąglone.
       \addplot[line width=1.1pt, seriaB, dashed, mark=square*, mark size=1.6pt] table[x=f, y=Z2z] {dane_reczny.dat};
       \addlegendentry{74270043 --- 2 zwoje}
     \end{axis}
-  \end{tikzpicture}
+  \end{tikzpicture}}
   \caption{Impedancja rdzenia 74270043 w~funkcji częstotliwości --- pomiar ręczny.
            Punkty o~ujemnej tłumienności pominięto.}
   \label{fig:reczny-Z}
@@ -488,19 +497,28 @@ Tabele~\ref{tab:auto-A} i~\ref{tab:auto-Z} zawierają wartości dla wybranych
 częstotliwości; pełne przebiegi (1000 punktów na serię) przedstawiono na
 wykresach~\ref{fig:auto-A} i~\ref{fig:auto-Z}.
 
-\begin{table}[H]
-  \centering
-  \small
+{\small
+\begin{longtable}{rrrrrr}
   \caption{Pomiar automatyczny: tłumienność $A$ wyznaczona względem interpolowanej
            charakterystyki referencyjnej.}
-  \label{tab:auto-A}
-  \begin{tabular}{rrrrrr}
-    \toprule
+  \label{tab:auto-A}\\
+  \toprule
     \multirow{2}{*}{$f$ [MHz]} & \multirow{2}{*}{$U_{ref}$ [dB$\mu$V]}
     & \multicolumn{2}{c}{74270043 --- $A$ [dB]} & \multicolumn{2}{c}{74270044 --- $A$ [dB]} \\
     \cmidrule(lr){3-4}\cmidrule(lr){5-6}
      & & 1 zwój & 2 zwoje & 1 zwój & 2 zwoje \\
-    \midrule
+  \midrule
+\endfirsthead
+  \multicolumn{6}{l}{\small\textit{Tabela \thetable{} --- ciąg dalszy}}\\
+  \toprule
+    \multirow{2}{*}{$f$ [MHz]} & \multirow{2}{*}{$U_{ref}$ [dB$\mu$V]}
+    & \multicolumn{2}{c}{74270043 --- $A$ [dB]} & \multicolumn{2}{c}{74270044 --- $A$ [dB]} \\
+    \cmidrule(lr){3-4}\cmidrule(lr){5-6}
+     & & 1 zwój & 2 zwoje & 1 zwój & 2 zwoje \\
+  \midrule
+\endhead
+  \bottomrule
+\endfoot
     1 & 96,86 & +2,12 & +2,29 & +2,19 & +3,29 \\
     2 & 96,86 & +1,26 & +1,79 & +1,52 & +5,09 \\
     5 & 97,13 & +0,52 & +2,81 & +2,86 & +10,31 \\
@@ -521,9 +539,7 @@ wykresach~\ref{fig:auto-A} i~\ref{fig:auto-Z}.
     800 & 87,86 & -0,77 & +2,66 & +2,86 & +4,62 \\
     900 & 87,63 & +1,24 & +3,23 & +4,80 & +6,52 \\
     1000 & 89,57 & +3,47 & +4,67 & +7,68 & +20,64 \\
-    \bottomrule
-  \end{tabular}
-\end{table}
+\end{longtable}}
 
 \paragraph{Przykład obliczeń do tabeli~\ref{tab:auto-A}.}
 Dla rdzenia 74270043 z~pojedynczym uzwojeniem przy $f = 50\ \mathrm{MHz}$
@@ -533,19 +549,28 @@ A = U_{ref} - U_2 = 96{,}86\ \mathrm{dB\mu V} - 89{,}67\ \mathrm{dB\mu V}
   = 7{,}19\ \mathrm{dB}.
 \]
 
-\begin{table}[H]
-  \centering
-  \small
+{\small
+\begin{longtable}{rrrrr}
   \caption{Pomiar automatyczny: impedancja $Z_B$ wyznaczona ze wzoru~\eqref{eq:impedancja}
            dla $Z_g+Z_L=\Zsum$.}
-  \label{tab:auto-Z}
-  \begin{tabular}{rrrrr}
-    \toprule
+  \label{tab:auto-Z}\\
+  \toprule
     \multirow{2}{*}{$f$ [MHz]} & \multicolumn{2}{c}{74270043 --- $Z_B$ [$\Omega$]}
     & \multicolumn{2}{c}{74270044 --- $Z_B$ [$\Omega$]} \\
     \cmidrule(lr){2-3}\cmidrule(lr){4-5}
      & 1 zwój & 2 zwoje & 1 zwój & 2 zwoje \\
-    \midrule
+  \midrule
+\endfirsthead
+  \multicolumn{5}{l}{\small\textit{Tabela \thetable{} --- ciąg dalszy}}\\
+  \toprule
+    \multirow{2}{*}{$f$ [MHz]} & \multicolumn{2}{c}{74270043 --- $Z_B$ [$\Omega$]}
+    & \multicolumn{2}{c}{74270044 --- $Z_B$ [$\Omega$]} \\
+    \cmidrule(lr){2-3}\cmidrule(lr){4-5}
+     & 1 zwój & 2 zwoje & 1 zwój & 2 zwoje \\
+  \midrule
+\endhead
+  \bottomrule
+\endfoot
     1 & 28 & 30 & 29 & 46 \\
     2 & 16 & 23 & 19 & 80 \\
     5 & 6 & 38 & 39 & 228 \\
@@ -566,9 +591,7 @@ A = U_{ref} - U_2 = 96{,}86\ \mathrm{dB\mu V} - 89{,}67\ \mathrm{dB\mu V}
     800 & -- & 36 & 39 & 70 \\
     900 & 15 & 45 & 74 & 112 \\
     1000 & 49 & 71 & 142 & 976 \\
-    \bottomrule
-  \end{tabular}
-\end{table}
+\end{longtable}}
 
 \paragraph{Przykład obliczeń do tabeli~\ref{tab:auto-Z}.}
 Dla tego samego punktu ($f = 50\ \mathrm{MHz}$, rdzeń 74270043, pojedyncze uzwojenie,
@@ -581,8 +604,9 @@ Z_B = \left( 10^{\frac{A}{20}} - 1 \right)(Z_g + Z_L)
 Wartości ujemnej tłumienności odrzucono wg kryterium $A \le 0$; w~tabeli podano
 wartości zaokrąglone do pełnych omów.
 
-\begin{figure}[htbp]
+\begin{figure}[htb]
   \centering
+  \makebox[\textwidth][c]{%
   \begin{tikzpicture}
     \begin{axis}[wykres, xmode=log, ylabel={Tłumienność $A$ [dB]},
                  title={Tłumienność badanych rdzeni --- pomiar automatyczny}]
@@ -592,13 +616,14 @@ wartości zaokrąglone do pełnych omów.
       \addplot[line width=1.1pt, seriaD, dashdotted] table[x=f, y=A44d] {dane_auto.dat}; \addlegendentry{74270044 --- 2 zwoje}
       \draw[gray, dotted] (axis cs:1,0) -- (axis cs:1000,0);
     \end{axis}
-  \end{tikzpicture}
+  \end{tikzpicture}}
   \caption{Tłumienność badanych rdzeni --- pomiar automatyczny, krok $1\ \mathrm{MHz}$.}
   \label{fig:auto-A}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[htb]
   \centering
+  \makebox[\textwidth][c]{%
   \begin{tikzpicture}
     \begin{axis}[wykres, xmode=log, ymode=log, ylabel={Impedancja $Z_B$ [$\Omega$]},
                  title={Impedancja badanych rdzeni --- pomiar automatyczny}]
@@ -607,10 +632,29 @@ wartości zaokrąglone do pełnych omów.
       \addplot[line width=1.1pt, seriaC, densely dotted] table[x=f, y=Z44p] {dane_auto.dat}; \addlegendentry{74270044 --- 1 zwój}
       \addplot[line width=1.1pt, seriaD, dashdotted] table[x=f, y=Z44d] {dane_auto.dat}; \addlegendentry{74270044 --- 2 zwoje}
     \end{axis}
-  \end{tikzpicture}
+  \end{tikzpicture}}
   \caption{Impedancja badanych rdzeni --- pomiar automatyczny.
            Przedziały, w~których wyznaczona tłumienność była ujemna, stanowią przerwy w~przebiegu.}
   \label{fig:auto-Z}
+\end{figure}
+
+\begin{figure}[htb]
+  \centering
+  \makebox[\textwidth][c]{%
+  \begin{tikzpicture}
+    \begin{axis}[wykres, xmode=log, ymode=log, ylabel={Impedancja $Z_B$ [$\Omega$]},
+                 title={Rdzeń 74270043: pomiar a~nota katalogowa}]
+      \addplot[line width=1.1pt, seriaA] table[x=f, y=Z43p] {dane_auto.dat}; \addlegendentry{pomiar --- 1 zwój}
+      \addplot[line width=1.1pt, seriaB, dashed] table[x=f, y=Z43d] {dane_auto.dat}; \addlegendentry{pomiar --- 2 zwoje}
+      \addplot[only marks, mark=o, mark size=3pt, seriaA, very thick] coordinates {(25,156) (100,274)};
+      \addlegendentry{katalog --- 1 zwój}
+      \addplot[only marks, mark=square, mark size=3pt, seriaB, very thick] coordinates {(25,335) (100,470)};
+      \addlegendentry{katalog --- 2 zwoje}
+    \end{axis}
+  \end{tikzpicture}}
+  \caption{Impedancja rdzenia 74270043 zmierzona metodą automatyczną na tle wartości
+           katalogowych. Dane dla rdzenia 74270044 zestawiono w~tabeli~\ref{tab:katalog}.}
+  \label{fig:katalog}
 \end{figure}
 
 \subsection{Zestawienie wartości charakterystycznych}
@@ -649,10 +693,10 @@ z~materiału 3W800 ($\mu_i = 800$, $T_C = 140\ ^\circ\mathrm{C}$), a~74270044
 z~materiału 4W620 ($\mu_i = 620$, $T_C = 150\ ^\circ\mathrm{C}$). Producent podaje
 impedancję osobno dla jednego i~dwóch zwojów, mierzoną na odcinku przewodu AWG26
 o~długości $165\ \mathrm{mm}$; wartości dla jednego zwoju objęte są tolerancją
-$\pm 25\%$, a~dla dwóch zwojów mają charakter typowy. W~tabeli~\ref{tab:katalog} przez $Z_{kat}$ oznaczono impedancję odczytaną
-z~noty katalogowej, a~przez $Z_{pom}$ --- impedancję zmierzoną w~ćwiczeniu;
-ostatnia kolumna podaje ich stosunek. Zestawienie z~wynikami
-pomiaru automatycznego zawiera tabela~\ref{tab:katalog}.
+$\pm 25\%$, a~dla dwóch zwojów mają charakter typowy.
+W~tabeli~\ref{tab:katalog} przez $Z_{kat}$ oznaczono impedancję odczytaną z~noty,
+przez $Z_{pom}$ --- impedancję zmierzoną w~ćwiczeniu, a~ostatnia kolumna podaje
+ich stosunek.
 
 \begin{table}[H]
   \centering
@@ -685,62 +729,52 @@ pomiaru automatycznego zawiera tabela~\ref{tab:katalog}.
   \end{tabular}
 \end{table}
 
-\begin{figure}[H]
-  \centering
-  \begin{tikzpicture}
-    \begin{axis}[wykres, xmode=log, ymode=log, ylabel={Impedancja $Z_B$ [$\Omega$]},
-                 title={Rdzeń 74270043: pomiar a~nota katalogowa}]
-      \addplot[line width=1.1pt, seriaA] table[x=f, y=Z43p] {dane_auto.dat}; \addlegendentry{pomiar --- 1 zwój}
-      \addplot[line width=1.1pt, seriaB, dashed] table[x=f, y=Z43d] {dane_auto.dat}; \addlegendentry{pomiar --- 2 zwoje}
-      \addplot[only marks, mark=o, mark size=3pt, seriaA, very thick] coordinates {(25,156) (100,274)};
-      \addlegendentry{katalog --- 1 zwój}
-      \addplot[only marks, mark=square, mark size=3pt, seriaB, very thick] coordinates {(25,335) (100,470)};
-      \addlegendentry{katalog --- 2 zwoje}
-    \end{axis}
-  \end{tikzpicture}
-  \caption{Impedancja rdzenia 74270043 zmierzona metodą automatyczną na tle wartości
-           katalogowych. Dane dla rdzenia 74270044 zestawiono w~tabeli~\ref{tab:katalog}.}
-  \label{fig:katalog}
-\end{figure}
+
+\paragraph{Przykład obliczeń do tabeli~\ref{tab:katalog}.}
+Dla rdzenia 74270043 z~pojedynczym uzwojeniem przy $f = 25\ \mathrm{MHz}$:
+\[
+\frac{Z_{pom}}{Z_{kat}} = \frac{73\ \Omega}{156\ \Omega} = 0{,}468 \approx 0{,}47 .
+\]
+
 
 \paragraph{Podobieństwa.} Dla podwójnego uzwojenia zgodność z~katalogiem jest bardzo
 dobra: zmierzone impedancje stanowią 89--106\% wartości producenta, a~maksimum
-charakterystyki (62 MHz dla rdzenia 74270043) odpowiada katalogowemu (ok.\ 75 MHz).
+charakterystyki (62 MHz dla rdzenia 74270043) odpowiada katalogowemu, odczytanemu
+z~wykresu w~nocie jako ok.\ 75 MHz.
 Zachowane jest też uszeregowanie elementów --- rdzeń 74270044 ma w~całym paśmie
 impedancję większą niż 74270043.
 
 \paragraph{Różnice.} Dla pojedynczego zwoju zmierzone impedancje stanowią tylko
-43--56\% katalogowych, a~maksimum wypada przy 49--64 MHz zamiast ok.\ 100--200 MHz.
-Zaniżona jest przy tym wartość jednozwojowa, a~nie zawyżona dwuzwojowa --- ich stosunek
-sięga $4{,}59$, a~więc przekracza granicę $N^2 = 4$, jaką dla podwojenia liczby zwojów
-wyznacza zależność $Z_B(N) \approx N^2 Z_B(1)$ --- wzór~\eqref{eq:n2}.
-Powód jest prosty: przy małej tłumienności niewielki błąd odczytu daje duży błąd
-impedancji. Falowanie charakterystyki referencyjnej $\pm 2\ \mathrm{dB}$ oznacza przy
-$A \approx 7-10\ \mathrm{dB}$ błąd $Z_B$ rzędu $\pm 40\%$, a~przy
-$A \approx 16-20\ \mathrm{dB}$ już tylko $\pm 28\%$. Producent wyznacza ponadto
-impedancję w~innym układzie niż tłumienność wtrąceniową w~torze $50\ \Omega$.
+43--56\% katalogowych, a~maksimum wypada przy 49--64 MHz zamiast 100--200 MHz
+odczytanych z~wykresu w~nocie katalogowej.
+Zaniżona jest wartość jednozwojowa, a~nie zawyżona dwuzwojowa --- ich stosunek sięga
+$4{,}59$, a~więc przekracza granicę $N^2 = 4$ ze wzoru~\eqref{eq:n2}. Powód jest prosty:
+przy małej tłumienności niewielki błąd odczytu daje duży błąd impedancji --- falowanie
+referencji $\pm 2\ \mathrm{dB}$ oznacza przy $A \approx 7-10\ \mathrm{dB}$ błąd $Z_B$
+rzędu $\pm 40\%$, a~przy $A \approx 16-20\ \mathrm{dB}$ już tylko $\pm 28\%$. Producent
+wyznacza ponadto impedancję w~innym układzie niż tłumienność wtrąceniową w~torze
+$50\ \Omega$.
 
 \section{Wnioski}
 
 \begin{itemize}
   \item Oba rdzenie osiągają maksimum tłumienności w~paśmie $50-100\ \mathrm{MHz}$:
         $7{,}2$ i~$10{,}4\ \mathrm{dB}$ przy pojedynczym uzwojeniu, $16{,}1$
-        i~$20{,}0\ \mathrm{dB}$ przy podwójnym. Poniżej $10\ \mathrm{MHz}$ pojedynczy
-        zwój jest praktycznie nieskuteczny. Rdzeń 74270044 ma w~całym paśmie większą
-        impedancję niż 74270043, co jest zgodne z~uszeregowaniem katalogowym.
+        i~$20{,}0\ \mathrm{dB}$ przy podwójnym; poniżej $10\ \mathrm{MHz}$ pojedynczy
+        zwój jest nieskuteczny. Rdzeń 74270044 ma w~całym paśmie większą impedancję
+        niż 74270043 --- zgodnie z~notami.
 
   \item Zgodność z~notami katalogowymi zależy od mierzonej tłumienności: przy
         $16-20\ \mathrm{dB}$ (2~zwoje) zmierzone impedancje stanowią 89--106\% wartości
         producenta, przy $7-10\ \mathrm{dB}$ (1~zwój) już tylko 43--56\%. Dlatego
-        zmierzony czterokrotny wzrost impedancji po podwojeniu liczby zwojów potwierdza
-        zależność~\eqref{eq:n2} tylko pozornie --- jest zawyżony przez zaniżoną wartość
-        jednozwojową; dane producenta dają stosunek $1{,}7-2{,}6$.
+        czterokrotny wzrost impedancji po podwojeniu zwojów potwierdza wzór~\eqref{eq:n2}
+        tylko pozornie --- zawyża go zaniżona wartość jednozwojowa; producent podaje
+        stosunek $1{,}7-2{,}6$.
 
   \item Ograniczeniem jest warunkowanie metody: falowanie charakterystyki referencyjnej
         rzędu $\pm 2\ \mathrm{dB}$ przekłada się przy $A \approx 7-10\ \mathrm{dB}$ na
-        błąd $Z_B$ sięgający $\pm 40\%$. Metoda nadaje się więc do oceny porównawczej
-        elementów absorpcyjnych, a~wiarygodne wartości bezwzględne daje dopiero
-        powyżej kilkunastu decybeli.
+        błąd $Z_B$ sięgający $\pm 40\%$. Metoda nadaje się więc do oceny porównawczej,
+        a~wiarygodne wartości bezwzględne daje dopiero powyżej kilkunastu decybeli.
 \end{itemize}
 
 \end{document}
