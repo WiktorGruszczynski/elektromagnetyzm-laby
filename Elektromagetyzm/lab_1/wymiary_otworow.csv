@@ -1,0 +1,15 @@
+# Wymiary otworow w badanych przeslonach - przepisane z zeszytu (zeszyt_wymiary_otworow.jpg)
+# Cwiczenie 1, grupa 5, PN 15:15, 26.10.2026
+# d_cm - srednica otworu [cm]; uwagi - adnotacje z zeszytu
+przeslona;d_cm;uwagi
+1;2,0;
+2;6,0;
+3;3,5;
+4;12,5;pierwotnie zapisano 13 cm (skreslone); adnotacja: otwor duzy - zmierzony niecentrycznie
+5;8,3;
+6;1,4;
+7;7,0;
+8;3,2;
+9;17,0;
+szczelina-pionowa;1,5;szerokosc szczeliny miedzy dwiema blachami
+szczelina-pozioma;1,5;szerokosc szczeliny miedzy dwiema blachami
