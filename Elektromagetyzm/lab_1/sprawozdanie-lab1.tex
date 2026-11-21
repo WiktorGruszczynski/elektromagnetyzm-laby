@@ -25,6 +25,7 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{float}
+\usepackage{placeins}
 \usepackage{longtable}
 \makeatletter
 \setlength{\@fptop}{0pt}
@@ -96,7 +97,7 @@
 \newcommand{\tpCwiczenie}{1}
 \newcommand{\tpTemat}{Badanie skuteczności ekranowania barier (przesłony, szczeliny)}
 \newcommand{\tpDataWyk}{26.10.2026}
-\newcommand{\tpDataOdd}{08.11.2026}             % SPRAWDZIĆ przed oddaniem
+\newcommand{\tpDataOdd}{10.11.2026}             % SPRAWDZIĆ przed oddaniem
 \newcommand{\tpWersja}{Oryginał}
 \newcommand{\tpAutor}{Wiktor Gruszczyński, 283808}
 \newcommand{\tpWspolautorA}{Nikodem Konieczny, 283838}
@@ -171,29 +172,21 @@
 
 \section{Cel ćwiczenia}
 
-Cel ćwiczenia sformułowano w~instrukcji~\cite[rozdz.~1]{instr} następująco:
-\begin{quote}
-\emph{„Celem ćwiczenia jest praktyczne zapoznanie się z~techniką pomiaru skuteczności
-ekranowania przesłon i~szczelin. W~ramach ćwiczenia doskonalone będą umiejętności
-posługiwania się aparaturą pomiarową oraz zestawiania toru pomiarowego. Ćwiczenie ma na
-celu zapoznanie się z~metodą pomiaru oraz pokazanie jak istotny jest wpływ właściwego
-zamontowanie badanych przesłon oraz układów do pomiaru referencyjnego na dokładność
-uzyskiwanych wyników.”}~\cite{instr}
-\end{quote}
-Badaniu poddano dziewięć przesłon z~otworami okrągłymi oraz dwie szczeliny o~szerokości
-$1{,}5\ \mathrm{cm}$ i~$1{,}8\ \mathrm{cm}$.
+Celem ćwiczenia jest wyznaczenie skuteczności ekranowania przesłon z~otworami oraz szczelin
+metodą porównawczą z~użyciem wektorowego analizatora sieci, a~także ocena wpływu zakresu
+dynamiki stanowiska i~sposobu montażu próbek na wiarygodność wyników. Zbadano dziewięć
+przesłon z~otworami okrągłymi oraz szczeliny o~szerokości $1{,}5$ i~$1{,}8\ \mathrm{cm}$.
 
 \section{Stanowisko pomiarowe}
 
 \subsection{Metoda pomiarowa}
 
-Zastosowano metodę porównawczą opisaną w~normie IEEE Std~299~\cite{ieee299}. Antena nadawcza
-znajduje się na zewnątrz komory ekranowanej, a~antena odbiorcza wewnątrz, naprzeciw okna
-pomiarowego~\cite[p.~2.2]{instr}. Wektorowy analizator sieci mierzy współczynnik transmisji
-między antenami. Antena odbiorcza była podłączona do portu~1, a~nadawcza do portu~2, dlatego
-mierzono parametr $S_{12}$, czyli stosunek fali odebranej na porcie~1 do fali pobudzającej
-port~2~\cite[p.~3.1]{instr}. Skuteczność ekranowania wyznacza się z~różnicy poziomów
-zmierzonych bez przesłony i~z~przesłoną, przy niezmienionym położeniu anten.
+Zastosowano metodę porównawczą opartą na normie IEEE Std~299. Antena nadawcza znajduje się
+na zewnątrz komory ekranowanej, a~antena odbiorcza wewnątrz, naprzeciw okna pomiarowego.
+Antena odbiorcza była podłączona do portu~1 analizatora, a~nadawcza do portu~2, dlatego
+mierzono parametr $S_{12}$. Skuteczność
+ekranowania wyznacza się z~różnicy poziomów zmierzonych bez przesłony i~z~przesłoną, przy
+niezmienionym położeniu anten.
 
 \subsection{Konfiguracja stanowiska pomiarowego}
 
@@ -211,7 +204,7 @@ zmierzonych bez przesłony i~z~przesłoną, przy niezmienionym położeniu anten
     \hline
     1 & Wektorowy analizator sieci (VNA)
       & Tektronix TTR506A, 100~kHz--6~GHz, obsługa z~komputera
-        w~programie VectorVu-PC~\cite{ttr500} \\
+        w~programie VectorVu-PC \\
     \hline
     2 & Antena nadawcza & antena logarytmiczno-periodyczna na statywie,
         na zewnątrz komory, port~2 \\
@@ -224,48 +217,48 @@ zmierzonych bez przesłony i~z~przesłoną, przy niezmienionym położeniu anten
     \hline
     5 & Przewody antenowe & współosiowe, ekranowane \\
     \hline
-    6 & Pełna przesłona metalowa & do pomiaru zakresu dynamiki \\
+    6 & Przesłony & pełna (pomiar dynamiki), 9 z~otworami (tab.~\ref{tab:probki}),
+        2 blachy do formowania szczelin \\
     \hline
-    7 & Badane przesłony & 9 blach z~otworami okrągłymi, tab.~\ref{tab:probki} \\
-    \hline
-    8 & Blachy do formowania szczelin & 2 arkusze nasuwane symetrycznie na okno \\
-    \hline
-    9 & Rama dociskowa ze sklejki i~ściski & docisk przesłony do ściany komory \\
+    7 & Rama dociskowa ze sklejki i~ściski & docisk przesłony do ściany komory \\
     \hline
   \end{tabular}
 \end{table}
 
-Niepewność wnoszona przez sam analizator jest pomijalna, ponieważ szum śladu TTR506A
-wynosi typowo $0{,}006\ \mathrm{dB}$~RMS w~paśmie od $200\ \mathrm{MHz}$ do
-$6\ \mathrm{GHz}$~\cite{ttr500}. O~niepewności wyniku decydują odbicia fal w~pomieszczeniu
-oraz powtarzalność montażu przesłony. Ich wpływ omówiono w~rozdziale~\ref{sec:analiza}.
+Niepewność wnoszona przez analizator (szum śladu typowo $0{,}006\ \mathrm{dB}$~RMS) jest
+pomijalna. O~niepewności wyniku decydują odbicia fal w~pomieszczeniu oraz powtarzalność
+montażu przesłon.
 
 \subsubsection{Opis konfiguracji}
 
-Analizator ustawiono przy komorze, aby przewody antenowe były jak najkrótsze. Antena
-odbiorcza stała na podstawie wewnątrz komory, a~antena nadawcza na statywie na zewnątrz.
+Analizator ustawiono przy komorze, aby zminimalizować długość przewodów antenowych. Antenę
+odbiorczą umieszczono na podstawie wewnątrz komory, a~antenę nadawczą na statywie na zewnątrz.
 Obie anteny skierowano na środek okna pomiarowego. Badane przesłony dociskano do ściany
 komory ramą ze sklejki i~ściskami, aby zapewnić kontakt galwaniczny na całym obwodzie okna.
 Zakres częstotliwości dobrano na podstawie charakterystyk dopasowania anten
-(rys.~\ref{fig:dopasowanie}). Antenę uznaje się za dopasowaną, gdy jej współczynnik odbicia
-nie przekracza $-10\ \mathrm{dB}$~\cite[rozdz.~5]{instr}.
+(rys.~\ref{fig:dopasowanie}), przyjmując kryterium współczynnika odbicia
+$\le -10\ \mathrm{dB}$.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.78\textwidth]{rys/schemat_stanowiska.png}
+  \includegraphics[width=0.6\textwidth]{rys/schemat_stanowiska.png}
   \caption{Ogólny schemat stanowiska do wyznaczania skuteczności ekranowania
-           wg~\cite[rys.~2-3]{instr}, za~\cite{ieee299}.}
+           wg~\cite[rys.~2-3]{instr}.}
   \label{fig:schemat}
 \end{figure}
 
 \begin{figure}[htbp]
   \centering
+  \begin{minipage}[c]{0.56\textwidth}\centering
+    \includegraphics[width=\linewidth]{rys/stanowisko.jpg}
+  \end{minipage}\hfill
+  \begin{minipage}[c]{0.41\textwidth}\centering
+    \includegraphics[width=\linewidth]{rys/antena_odbiorcza.jpg}
+  \end{minipage}\\[2pt]
   \begin{minipage}[t]{0.56\textwidth}\centering
-    \includegraphics[width=\linewidth]{rys/stanowisko.jpg}\\[-1pt]
     {\small a) antena nadawcza i~komora z~oknem pomiarowym}
   \end{minipage}\hfill
   \begin{minipage}[t]{0.41\textwidth}\centering
-    \includegraphics[width=\linewidth]{rys/antena_odbiorcza.jpg}\\[-1pt]
     {\small b) antena odbiorcza wewnątrz komory}
   \end{minipage}
   \caption{Stanowisko pomiarowe w~sali~347 bud.~C-4, zdjęcia własne z~26.10.2026.}
@@ -292,14 +285,12 @@ nie przekracza $-10\ \mathrm{dB}$~\cite[rozdz.~5]{instr}.
 
 \subsection{Nastawy analizatora i~źródło danych}
 
-\paragraph{Uwaga metodyczna.} Podczas zajęć wyniki zapisano poleceniem \emph{Save State}
-zamiast \emph{Save SnP}. Pliki \texttt{.cstate} w~protokole zawierają przez to tylko
-nastawy i~kalibrację przyrządu, bez przebiegów $S_{12}$. Na polecenie prowadzącego
-sprawozdanie opracowano na danych przekazanych przez prowadzącego~\cite{dane}. Pomiar
-wykonano na tym samym stanowisku i~dla tego samego zestawu przesłon, przy odległości anten
-$1{,}8\ \mathrm{m}$ i~polaryzacji pionowej. Opis stanowiska, nastawy przyrządu, zdjęcia
-i~wymiary próbek pochodzą z~zajęć grupy~5. Nastawy z~obu źródeł zestawiono
-w~tabeli~\ref{tab:nastawy}.
+Podczas zajęć wyniki zapisano poleceniem \emph{Save State} zamiast \emph{Save SnP}, przez co
+pliki \texttt{.cstate} zawierają tylko nastawy przyrządu, bez przebiegów $S_{12}$. Zgodnie
+z~decyzją prowadzącego sprawozdanie opracowano na podstawie udostępnionych danych
+pomiarowych~\cite{dane}, wykonanych metodą opisaną w~rozdz.~2.1 dla tego samego zestawu
+przesłon, przy odległości anten $1{,}8\ \mathrm{m}$ i~polaryzacji pionowej.
+Opis stanowiska, zdjęcia i~wymiary próbek pochodzą z~zajęć grupy~5.
 
 \begin{table}[H]
   \centering
@@ -309,7 +300,7 @@ w~tabeli~\ref{tab:nastawy}.
   \renewcommand{\arraystretch}{1.15}
   \begin{tabular}{|l|>{\centering\arraybackslash}p{5.3cm}|>{\centering\arraybackslash}p{4.6cm}|}
     \hline
-    \textbf{Parametr} & \textbf{Zajęcia gr.~5 (pliki \texttt{.cstate})} & \textbf{Dane opracowane~\cite{dane}} \\
+    \textbf{Parametr} & \textbf{Zajęcia gr.~5 (pliki \texttt{.cstate})} & \textbf{Dane opracowane} \\
     \hline
     Mierzony parametr      & $S_{12}$ & $S_{12}$ oraz $S_{22}$ \\
     \hline
@@ -321,7 +312,7 @@ w~tabeli~\ref{tab:nastawy}.
     \hline
     Moc wyjściowa portu    & $0\ \mathrm{dBm}$ & nie podano, przyjęto $0\ \mathrm{dBm}$ \\
     \hline
-    Uśrednianie            & współczynnik~5~\cite[p.~3.1.1]{instr} & nie podano \\
+    Uśrednianie            & współczynnik~5 & nie podano \\
     \hline
     Odległość anten / polaryzacja & nie zapisano & $1{,}8\ \mathrm{m}$ / pionowa \\
     \hline
@@ -332,10 +323,9 @@ w~tabeli~\ref{tab:nastawy}.
 
 \subsection{Badane próbki}
 
-Przesłony oznaczono tak jak w~danych~\cite{dane} symbolem $N\times d$, gdzie $N$ to liczba
-otworów, a~$d$ nominalna średnica otworu w~centymetrach. W~tabeli~\ref{tab:probki} podano
-również średnice zmierzone przez grupę wraz z~numerami płyt z~zajęć oraz częstotliwość
-graniczną $f_g$ ze wzoru~\eqref{eq:fg}, powyżej której otwór przestaje tłumić falę.
+Przesłony oznaczono symbolem $N\times d$, gdzie $N$ to liczba otworów, a~$d$ nominalna
+średnica otworu w~centymetrach. W~tabeli~\ref{tab:probki} podano również średnice zmierzone na
+zajęciach oraz częstotliwość graniczną $f_g$ ze wzoru~\eqref{eq:fg}.
 
 \begin{table}[H]
   \centering
@@ -356,15 +346,15 @@ graniczną $f_g$ ze wzoru~\eqref{eq:fg}, powyżej której otwór przestaje tłum
     16$\times$8  & 5 & 16  & 8   & 8,3  & 1,87 \\ \hline
     1$\times$12  & 4 & 1   & 12  & 12,5 & 1,25 \\ \hline
     4$\times$12  & 9 & 4   & 12  & 17,0 & 1,25 \\ \hline
-    Szczelina    & --- & --- & \multicolumn{2}{c|}{szer. 1,5 oraz 1,8} & --- \\ \hline
+    Szczelina    & --- & --- & \multicolumn{2}{c|}{pion. 1,5; poz. 1,8} & --- \\ \hline
   \end{tabular}
 \end{table}
 
-Numery płyt przyporządkowano oznaczeniom na podstawie zdjęć, porównując liczbę i~rozmiar
-otworów. Średnice mierzono linijką przez okno w~ramie dociskowej, która częściowo zasłaniała
-otwory. Stąd biorą się różnice względem wartości nominalnych, największe dla płyty~9
-o~nachodzących na siebie otworach i~dla płyty~4, zmierzonej niecentrycznie. W~obliczeniach
-przyjęto wartości nominalne.
+Średnice mierzono linijką przez okno w~ramie dociskowej, która częściowo zasłaniała otwory,
+co tłumaczy rozbieżności względem wartości nominalnych (płyta~4 zmierzona niecentrycznie).
+W~obliczeniach przyjęto wartości nominalne. Płyta~9 (4$\times$12) ma otwory częściowo się
+pokrywające, więc jej rzeczywisty największy wymiar otworu wynosi ok.~$17\ \mathrm{cm}$, co
+odpowiada $f_g \approx 0{,}88\ \mathrm{GHz}$, czyli poniżej badanego pasma.
 
 \begin{figure}[htbp]
   \centering
@@ -387,28 +377,28 @@ przyjęto wartości nominalne.
 
 \subsection{Pomiar referencyjny i~pomiar zakresu dynamiki}
 
-Pomiar referencyjny wykonano przy otwartym oknie komory, bez przesłony. Następnie, przy tym
-samym położeniu anten, okno zamknięto pełną przesłoną metalową i~zmierzono zakres dynamiki
-stanowiska, czyli najmniejszy poziom sygnału, jaki dociera do anteny odbiorczej przy
-szczelnie zamkniętym oknie~\cite[p.~2.2.3]{instr}.
+Pomiar referencyjny wykonano przy otwartym oknie komory. Następnie, przy tym samym położeniu
+anten, okno zamknięto pełną przesłoną metalową i~zmierzono poziom sygnału przenikającego do
+komory, który wyznacza zakres dynamiki stanowiska.
 
 \subsection{Pomiary przesłon i~szczelin}
 
-Każdą przesłonę montowano centrycznie w~oknie i~dociskano do ściany komory~\cite[p.~3.4]{instr}.
-Szczeliny tworzono, nasuwając symetrycznie dwie blachy z~obu stron okna tak, aby szczelina
-o~zadanej szerokości powstała w~jego środku~\cite[p.~3.5]{instr}. Położenie anten nie
-zmieniało się w~trakcie wszystkich pomiarów.
+Każdą przesłonę montowano centrycznie w~oknie i~dociskano do ściany komory. Szczeliny
+tworzono, nasuwając symetrycznie dwie blachy z~obu stron okna, jedną pionowo, a~drugą
+poziomo. W~udostępnionych danych nie zapisano ułożenia szczelin. Przyjęto, że szczelina
+$1{,}5\ \mathrm{cm}$ była pionowa, a~$1{,}8\ \mathrm{cm}$ pozioma, ponieważ szczelina
+prostopadła do $\vec E$ powinna mieć mniejszą skuteczność ekranowania. Położenie anten pozostawało
+niezmienione podczas wszystkich pomiarów.
 
 \subsection{Wyniki pomiarów}
 
-Analizator zapisuje parametr $S_{12}$ jako liczbę zespoloną. Jego moduł w~decybelach
-obliczono ze wzoru:
+Analizator zapisuje $S_{12}$ jako liczbę zespoloną, której moduł w~decybelach wynosi:
 \begin{equation}
   |S_{12}|\,[\mathrm{dB}] = 20\log_{10}\sqrt{(\operatorname{Re} S_{12})^2 + (\operatorname{Im} S_{12})^2}.
   \label{eq:s12db}
 \end{equation}
 Tabele~\ref{tab:s12ref} i~\ref{tab:s12przeslony} zawierają wartości dla wybranych
-częstotliwości. Pełne przebiegi, po 201 punktów, przedstawiono na wykresach
+częstotliwości, pełne przebiegi (201 punktów) przedstawiono na wykresach
 w~rozdziale~\ref{sec:analiza}.
 
 \begin{table}[H]
@@ -435,7 +425,7 @@ $f = 0{,}80\ \mathrm{GHz}$:
   |S_{12,\mathrm{ref}}| = 20\log_{10}\sqrt{(-0{,}02060)^2 + (-0{,}01059)^2}
   = 20\log_{10}(0{,}02316) = -32{,}70\ \mathrm{dB} \approx -32{,}7\ \mathrm{dB}.
 \]
-Pozostałe kolumny obliczono tak samo. W~tabeli podano wartości zaokrąglone do $0{,}1\ \mathrm{dB}$.
+Pozostałe kolumny obliczono w~ten sam sposób. W~tabeli podano wartości zaokrąglone do $0{,}1\ \mathrm{dB}$.
 
 \begin{table}[H]
   \centering
@@ -467,22 +457,19 @@ Skuteczność ekranowania dla pola elektrycznego zdefiniowana jest zależności�
   SE = 20\log_{10}\frac{E_0}{E_1}\ [\mathrm{dB}],
   \label{eq:sedef}
 \end{equation}
-gdzie $E_0$ to natężenie pola padającego na ekran, a~$E_1$ natężenie pola po drugiej stronie
-ekranu. Moduł $S_{12}$ jest proporcjonalny do natężenia pola przy antenie odbiorczej, więc
-przy niezmienionym ustawieniu anten skuteczność ekranowania i~zakres dynamiki wynoszą:
+gdzie $E_0$ i~$E_1$ to natężenie pola bez ekranu i~za ekranem. Moduł $S_{12}$ jest
+proporcjonalny do natężenia pola przy antenie odbiorczej, więc przy niezmienionym ustawieniu
+anten skuteczność ekranowania i~zakres dynamiki wynoszą:
 \begin{equation}
   SE = S_{12,\mathrm{ref}}\,[\mathrm{dB}] - S_{12,x}\,[\mathrm{dB}],
   \qquad
   D = S_{12,\mathrm{ref}}\,[\mathrm{dB}] - S_{12,\mathrm{dyn}}\,[\mathrm{dB}].
   \label{eq:se}
 \end{equation}
-Zakres dynamiki $D$ jest największą skutecznością ekranowania, jaką można zmierzyć na
-stanowisku.
+Zmierzona wartość $SE$ jest wiarygodna tylko wtedy, gdy jest wyraźnie mniejsza od $D$.
 
-Długość fali $\lambda = c/f$ zmienia się w~badanym paśmie od $37{,}5\ \mathrm{cm}$ przy
-$0{,}8\ \mathrm{GHz}$ do $5{,}2\ \mathrm{cm}$ przy $5{,}8\ \mathrm{GHz}$. Otwór o~największym
-wymiarze $d$ przestaje tłumić falę, gdy $d \ge \lambda/2$, czyli powyżej częstotliwości
-granicznej~\cite[rozdz.~6]{ott}:
+Otwór o~największym wymiarze $d$ przestaje skutecznie tłumić falę, gdy $d \ge \lambda/2$, czyli powyżej
+częstotliwości granicznej:
 \begin{equation}
   f_g = \frac{c}{2d}.
   \label{eq:fg}
@@ -493,34 +480,17 @@ wzorem~\cite[rozdz.~6]{ott}:
   SE_{teor} = 20\log_{10}\frac{\lambda}{2d} - 20\log_{10}\sqrt{N}.
   \label{eq:ott}
 \end{equation}
-Wynika z~niego, że skuteczność ekranowania maleje o~$20\ \mathrm{dB}$ na dekadę
-częstotliwości, o~$6\ \mathrm{dB}$ przy dwukrotnym zwiększeniu średnicy otworu oraz
-o~$10\log_{10}N$ przy $N$ otworach. Dla szczeliny o~długości $L$ wymiarem decydującym jest
-$L$, jeżeli wektor $\vec E$ jest prostopadły do szczeliny, bo szczelina przecina wtedy prądy
-indukowane w~ekranie. Gdy $\vec E$ jest równoległy do szczeliny, prądy płyną wzdłuż niej
-i~szczelina słabo promieniuje~\cite[rozdz.~6]{ott}.
+Wzór przewiduje spadek $SE$ o~$20\ \mathrm{dB/dek.}$ częstotliwości, o~$6\ \mathrm{dB}$ przy
+dwukrotnie większej średnicy i~o~$10\log_{10}N$ przy $N$ otworach. Wyprowadzono go dla
+wąskiej szczeliny o~długości $d$, czyli dla najgorszego przypadku, więc dla otworów okrągłych
+prowadzi do zaniżonego oszacowania. Przenikanie pola przez szczelinę jest największe, gdy wektor $\vec E$ jest do
+niej prostopadły, ponieważ szczelina przerywa wówczas prądy indukowane w~ekranie. Gdy
+$\vec E$ jest równoległy do szczeliny, prądy płyną wzdłuż niej, a~przenikanie pola jest
+niewielkie.
 
-Pomiaru szumu własnego z~odłączonymi antenami nie ma w~danych~\cite{dane}, dlatego poziom
-szumu analizatora wyznaczono z~karty katalogowej:
-\begin{equation}
-  N_{S12} = N_0 + 10\log_{10}\frac{B_{IF}}{1\ \mathrm{Hz}} - P\ [\mathrm{dB}],
-  \label{eq:szum}
-\end{equation}
-gdzie $N_0$ to gęstość widmowa szumu. W~paśmie od $1$ do $6\ \mathrm{GHz}$ wynosi ona co
-najwyżej $-125\ \mathrm{dBm/Hz}$, a~typowo $-130\ \mathrm{dBm/Hz}$~\cite{ttr500}. $B_{IF}$ to
-szerokość pasma IF, a~$P$ to moc nadawana. Dla nastaw stanowiska, czyli
-$B_{IF} = 10\ \mathrm{kHz}$ i~$P = 0\ \mathrm{dBm}$, otrzymuje się:
-\[
-  N_{S12} = -125\ \mathrm{dBm/Hz} + 10\log_{10}(10^4) - 0\ \mathrm{dBm}
-  = -125 + 40 = -85\ \mathrm{dB},
-\]
-a~typowo $-90\ \mathrm{dB}$. Największy możliwy zakres dynamiki wynosi więc
-$D_{max} = S_{12,\mathrm{ref}} - N_{S12}$.
-
-Przebiegi zawierają szybkie zmiany spowodowane odbiciami w~pomieszczeniu. Na wykresach
-porównawczych pokazano dlatego średnią kroczącą z~9~sąsiednich punktów, czyli z~okna
-$200\ \mathrm{MHz}$, oznaczoną skrótem „wygł.”. Wartości w~tabelach nie są uśredniane,
-o~ile nie zaznaczono inaczej.
+Przebiegi wykazują silne oscylacje wywołane odbiciami fal w~pomieszczeniu, dlatego na
+wykresach przedstawiono również średnią kroczącą z~9~punktów (okno $200\ \mathrm{MHz}$), oznaczoną „wygł.”.
+Wartości w~tabelach nie są uśredniane, o~ile nie zaznaczono inaczej.
 
 \section{Opracowanie wyników}
 \label{sec:analiza}
@@ -529,14 +499,29 @@ o~ile nie zaznaczono inaczej.
 \subsection{Zakres dynamiki stanowiska}
 \label{sec:el1}
 
+Udostępnione dane nie obejmują pomiaru szumu własnego przy odłączonych antenach, dlatego
+poziom szumu analizatora oszacowano na podstawie karty katalogowej~\cite{ttr500}:
+\begin{equation}
+  N_{S12} = N_0 + 10\log_{10}\frac{B_{IF}}{1\ \mathrm{Hz}} - P\ [\mathrm{dB}],
+  \label{eq:szum}
+\end{equation}
+gdzie $N_0$ to gęstość widmowa szumu (maks. $-125\ \mathrm{dBm/Hz}$, typowo
+$-130\ \mathrm{dBm/Hz}$), $B_{IF}$ szerokość pasma IF, a~$P$ moc nadawana. Wartości $B_{IF}$
+i~$P$ dla opracowanych danych nie są znane, przyjęto więc nastawy z~zajęć
+($10\ \mathrm{kHz}$, $0\ \mathrm{dBm}$):
+\[
+  N_{S12} = -125\ \mathrm{dBm/Hz} + 10\log_{10}(10^4) - 0\ \mathrm{dBm} = -85\ \mathrm{dB}
+\]
+(typowo $-90\ \mathrm{dB}$). Odpowiadający mu zakres dynamiki to
+$D_{max} = S_{12,\mathrm{ref}} - N_{S12}$.
+
 \begin{table}[H]
   \centering
   \small
-  \caption{Zakres dynamiki stanowiska na tle szumu własnego aparatury,
-           $N_{S12} = -85\ \mathrm{dB}$.}
+  \caption{Zakres dynamiki na tle oszacowanego szumu analizatora $N_{S12} = -85\ \mathrm{dB}$.}
   \label{tab:dynamika}
-  \renewcommand{\arraystretch}{1.1}
-  \begin{tabular}{rrrrrr}
+  \renewcommand{\arraystretch}{1.0}
+  \begin{tabular}{rrrrrc}
     \toprule
     $f$ & $S_{12,\mathrm{ref}}$ & $S_{12,\mathrm{dyn}}$ & $D$ & $D_{max}$ & $S_{12,\mathrm{dyn}} - N_{S12}$ \\
     $[\mathrm{GHz}]$ & [dB] & [dB] & [dB] & [dB] & [dB] \\
@@ -555,9 +540,9 @@ o~ile nie zaznaczono inaczej.
   S_{12,\mathrm{dyn}} - N_{S12} &= -99{,}47\ \mathrm{dB} - (-85\ \mathrm{dB}) = -14{,}47\ \mathrm{dB}
      \approx -14{,}5\ \mathrm{dB}.
 \end{align*}
-Wartość ujemna w~ostatniej kolumnie oznacza, że odczyt leży poniżej poziomu szumu.
+Wartość ujemna w~ostatniej kolumnie oznacza odczyt poniżej oszacowanego poziomu szumu.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
   \centering
   \begin{tikzpicture}
     \begin{axis}[wykres, ylabel={$S_{12}$ [dB]}, ymin=-125, ymax=-25, legend columns=2,
@@ -569,17 +554,29 @@ Wartość ujemna w~ostatniej kolumnie oznacza, że odczyt leży poniżej poziomu
       \addplot[line width=1.2pt, black, dashed] table[x=f, y=dyng] {dane/wyniki.dat};
       \addlegendentry{$S_{12,\mathrm{dyn}}$ wygł.}
       \addplot[line width=1.1pt, seriaD, densely dashdotted] coordinates {(0.8,-85) (5.8,-85)};
-      \addlegendentry{szum VNA, gwarantowany ($-85$~dB)}
+      \addlegendentry{szum VNA, oszac. maks. ($-85$~dB)}
       \addplot[line width=1.1pt, seriaC, densely dotted] coordinates {(0.8,-90) (5.8,-90)};
-      \addlegendentry{szum VNA, typowy ($-90$~dB)}
+      \addlegendentry{szum VNA, oszac. typowy ($-90$~dB)}
     \end{axis}
   \end{tikzpicture}
-  \caption{Przebiegi $S_{12}$ pomiaru referencyjnego i~pomiaru dynamiki oraz poziom szumu
-           własnego analizatora wyznaczony ze wzoru~\eqref{eq:szum} na podstawie~\cite{ttr500}.}
+  \caption{Przebiegi $S_{12}$ pomiaru referencyjnego i~pomiaru dynamiki na tle szumu własnego
+           analizatora oszacowanego ze wzoru~\eqref{eq:szum}.}
   \label{fig:poziomy}
 \end{figure}
 
-\begin{figure}[htbp]
+Zakres dynamiki po wygładzeniu wynosi od $21{,}6$ do $56{,}9\ \mathrm{dB}$, średnio
+$43{,}3\ \mathrm{dB}$ (tab.~\ref{tab:pasma}). W~paśmie $4$--$5{,}8\ \mathrm{GHz}$ spada średnio do
+$35\ \mathrm{dB}$, ponieważ średni poziom sygnału referencyjnego maleje z~$-39\ \mathrm{dB}$
+poniżej $2\ \mathrm{GHz}$ do $-59\ \mathrm{dB}$ powyżej $4{,}8\ \mathrm{GHz}$, a~poziom
+$S_{12,\mathrm{dyn}}$ pozostaje prawie stały. Przyczyną nie jest dopasowanie anteny
+nadawczej: $S_{22}$ przekracza $-10\ \mathrm{dB}$ tylko w~pojedynczych punktach w~całym
+paśmie (rys.~\ref{fig:s22}). Wąskie minima
+przebiegu referencyjnego, np.\ $-61{,}6\ \mathrm{dB}$ przy $3{,}5\ \mathrm{GHz}$, wynikają
+z~odbić fal w~pomieszczeniu laboratoryjnym, które nie jest komorą bezodbiciową. W~tych punktach $D$ i~$SE$ są
+zaniżone, a~pojedyncze skrajne wartości surowego $D$ (od $11{,}7$ do $81{,}5\ \mathrm{dB}$)
+nie są miarodajne.
+
+\begin{figure}[H]
   \centering
   \begin{tikzpicture}
     \begin{axis}[wykres, ylabel={Zakres dynamiki $D$ [dB]}, ymin=0, ymax=90, legend columns=3,
@@ -592,45 +589,39 @@ Wartość ujemna w~ostatniej kolumnie oznacza, że odczyt leży poniżej poziomu
       \addlegendentry{$D_{max} = S_{12,\mathrm{ref}} - N_{S12}$}
     \end{axis}
   \end{tikzpicture}
-  \caption{Zakres dynamiki $D$ ze wzoru~\eqref{eq:se} na tle zakresu dynamiki ograniczonego
-           szumem własnym analizatora $D_{max}$.}
+  \caption{Zakres dynamiki $D$ ze wzoru~\eqref{eq:se} na tle zakresu dynamiki $D_{max}$
+           wynikającego z~oszacowanego szumu analizatora.}
   \label{fig:dynamika}
 \end{figure}
+
+W~większości pasma $S_{12,\mathrm{dyn}}$ leży między $-85$ a~$-100\ \mathrm{dB}$ (mediana
+$-91\ \mathrm{dB}$), czyli poniżej oszacowanego szumu $-85\ \mathrm{dB}$, i~w~przeciwieństwie
+do $S_{12,\mathrm{ref}}$ nie maleje z~częstotliwością (rys.~\ref{fig:poziomy}). Z~tego powodu
+w~części punktów $D > D_{max}$ (rys.~\ref{fig:dynamika}), np.\ przy $1\ \mathrm{GHz}$ $67{,}4$
+wobec $52{,}9\ \mathrm{dB}$.
+Oznacza to, że rzeczywisty szum analizatora w~tym pomiarze był niższy od
+oszacowanego, czyli przyjęte $B_{IF}$ lub $P$ różnią się od rzeczywistych nastaw. Pomiar
+dynamiki jest w~tych punktach ograniczony szumem, a~nie wyciekiem sygnału. Wyjątkiem jest pasmo
+$1{,}75$--$2{,}05\ \mathrm{GHz}$, w~którym $S_{12,\mathrm{dyn}}$ rośnie do $-71{,}3\ \mathrm{dB}$.
+Ponieważ w~tym paśmie szczelina $1{,}5\ \mathrm{cm}$ i~przesłona 100$\times$1 wykazują $SE$
+większe od $D$ (np.\ tab.~\ref{tab:seszczeliny}, $2\ \mathrm{GHz}$), wyciek nie pochodzi
+z~przewodów ani z~komory, lecz z~nieszczelności montażu pełnej przesłony. Zakres dynamiki jest tam zaniżony, co
+potwierdza wpływ montażu na wynik pomiaru.
 
 \begin{figure}[htbp]
   \centering
   \begin{tikzpicture}
     \begin{axis}[wykres, ylabel={$S_{22}$ [dB]}, ymin=-40, ymax=0,
-                 title={Dopasowanie anteny nadawczej (port 2) podczas pomiaru referencyjnego}]
+                 title={Dopasowanie anteny na porcie 2 (nadawczej) podczas pomiaru referencyjnego}]
       \addplot[line width=0.9pt, seriaA] table[x=f, y=S22] {dane/wyniki.dat};
       \addlegendentry{$S_{22}$}
       \addplot[line width=1.1pt, seriaB, dashed] coordinates {(0.8,-10) (5.8,-10)};
-      \addlegendentry{kryterium dopasowania $-10$~dB~\cite{instr}}
+      \addlegendentry{kryterium dopasowania $-10$~dB}
     \end{axis}
   \end{tikzpicture}
-  \caption{Współczynnik odbicia anteny nadawczej zmierzony w~danych~\cite{dane}.}
+  \caption{Współczynnik odbicia $S_{22}$ anteny nadawczej (port~2) w~pomiarze referencyjnym.}
   \label{fig:s22}
 \end{figure}
-
-Zakres dynamiki zmienia się od $11{,}7\ \mathrm{dB}$ przy $5{,}15\ \mathrm{GHz}$ do
-$81{,}5\ \mathrm{dB}$ przy $2{,}40\ \mathrm{GHz}$, a~po wygładzeniu od $21{,}6$ do
-$56{,}9\ \mathrm{dB}$. Średnio wynosi $46{,}4\ \mathrm{dB}$ w~paśmie $0{,}8$--$2\ \mathrm{GHz}$,
-$48{,}8\ \mathrm{dB}$ w~paśmie $2$--$4\ \mathrm{GHz}$ i~$35{,}0\ \mathrm{dB}$ w~paśmie
-$4$--$5{,}8\ \mathrm{GHz}$ (tab.~\ref{tab:pasma}). W~górnej części pasma zakres dynamiki jest
-mniejszy, bo spada poziom sygnału referencyjnego, średnio z~$-39{,}4\ \mathrm{dB}$ do
-$-56{,}5\ \mathrm{dB}$. Antena nadawcza ma $S_{22}$ powyżej $-10\ \mathrm{dB}$ w~$14\%$ punktów,
-głównie powyżej $4{,}8\ \mathrm{GHz}$ (rys.~\ref{fig:s22}).
-
-W~przebiegu referencyjnym są wąskie minima, np.\ $-61{,}6\ \mathrm{dB}$ przy
-$3{,}50\ \mathrm{GHz}$. Wynikają one z~odbić w~pomieszczeniu, bo pomiar nie był wykonywany
-w~komorze bezodbiciowej~\cite[p.~2.2.1]{instr}.
-
-Średni poziom w~pomiarze dynamiki wynosi $-91{,}0\ \mathrm{dB}$ i~tylko $16\%$ punktów leży
-powyżej poziomu szumu $-85\ \mathrm{dB}$ (rys.~\ref{fig:poziomy}). W~większości pasma zakres
-dynamiki ogranicza więc szum analizatora. Wyjątkiem jest pasmo $1{,}75$--$2{,}05\ \mathrm{GHz}$,
-gdzie $S_{12,\mathrm{dyn}}$ rośnie do $-71{,}3\ \mathrm{dB}$, czyli ok.~$14\ \mathrm{dB}$ ponad
-szum. Tam do komory przenika sygnał, np.\ przez przewód antenowy lub nieszczelność przy
-przesłonie.
 
 % ---------------------------------------------------------------------
 \subsection{Skuteczność ekranowania przesłon}
@@ -733,7 +724,9 @@ Ujemne wartości $SE$ pojawiają się tam, gdzie przebieg referencyjny ma głęb
     \tabinput{tabele/t_zestawienie}
     \bottomrule
     \multicolumn{9}{l}{\footnotesize $^{*}$ poza badanym pasmem; ,,---'' oznacza zakres poniżej $f_g$ węższy
-                       niż oktawa, prostej nie dopasowano.}
+                       niż oktawa, prostej nie dopasowano;}\\
+    \multicolumn{9}{l}{\footnotesize ujemne $SE_{teor,1}$ oznacza, że wzór~\eqref{eq:ott} jest poza
+                       zakresem stosowalności ($SE \approx 0\ \mathrm{dB}$).}
   \end{tabular}
 \end{table}
 
@@ -749,37 +742,31 @@ gdzie $d = 2\ \mathrm{cm} = 0{,}02\ \mathrm{m}$ i~$N = 16$:
 Średnia $\overline{SE}$ to średnia ze wszystkich 201 punktów, a~nachylenie $a$ wyznaczono
 metodą najmniejszych kwadratów poniżej $f_g$.
 
-Najskuteczniejsza jest przesłona 100$\times$1 ze średnią $33{,}0\ \mathrm{dB}$. Kolejne są
-przesłony 16$\times$2 ($26{,}1\ \mathrm{dB}$), 16$\times$3 ($20{,}0\ \mathrm{dB}$) i~4$\times$6
-($19{,}3\ \mathrm{dB}$). Przesłony 100$\times$3, 36$\times$6, 16$\times$8, 1$\times$12
-i~4$\times$12 dają średnio tylko od $2{,}6$ do $7{,}3\ \mathrm{dB}$. Wszystkie przebiegi maleją
-ze wzrostem częstotliwości, zgodnie z~teorią. Dla przesłon z~$f_g \ge 2{,}5\ \mathrm{GHz}$
-nachylenie wynosi od $-17{,}4$ do $-38{,}0\ \mathrm{dB/dek.}$, a~dla przesłon 100$\times$1
-i~100$\times$3 ($-22{,}2$ i~$-17{,}4\ \mathrm{dB/dek.}$) jest bliskie wartości
-$-20\ \mathrm{dB/dek.}$ ze wzoru~\eqref{eq:ott}. Powyżej $f_g$ przesłony o~dużych otworach
-praktycznie nie ekranują. Przy $3\ \mathrm{GHz}$ przesłona 16$\times$8 daje tylko
-$4{,}8\ \mathrm{dB}$, a~36$\times$6 tylko $2{,}5\ \mathrm{dB}$ (rys.~\ref{fig:se-duze}).
+Najskuteczniejsza jest przesłona 100$\times$1 (średnio $33{,}0\ \mathrm{dB}$), następnie
+16$\times$2, 16$\times$3 i~4$\times$6 ($19$--$26\ \mathrm{dB}$), a~pozostałe zapewniają poniżej
+$8\ \mathrm{dB}$. Poniżej $f_g$ $SE$ maleje z~częstotliwością: dla 100$\times$1, 100$\times$3,
+36$\times$6 i~16$\times$8 nachylenie (od $-17{,}4$ do $-22{,}3\ \mathrm{dB/dek.}$) jest bliskie
+teoretycznym $-20\ \mathrm{dB/dek.}$, a~dla 16$\times$2, 16$\times$3 i~4$\times$6 spadek jest
+bardziej stromy. Powyżej $f_g$ przesłony o~dużych otworach, z~wyjątkiem 4$\times$6, nie
+zapewniają istotnego tłumienia (36$\times$6: $2{,}5\ \mathrm{dB}$ przy $3\ \mathrm{GHz}$,
+rys.~\ref{fig:se-duze}).
 
-Z~teorią zgadzają się też kierunki zmian. Przy tej samej liczbie otworów większa średnica
-daje mniejszą skuteczność ekranowania: $33{,}0\ \mathrm{dB}$ dla 100$\times$1 i~$5{,}3\ \mathrm{dB}$
-dla 100$\times$3 oraz $26{,}1\ \mathrm{dB}$ dla 16$\times$2 i~$20{,}0\ \mathrm{dB}$ dla
-16$\times$3. Przy tej samej średnicy więcej otworów daje mniejszą skuteczność:
-$19{,}3\ \mathrm{dB}$ dla 4$\times$6 i~$3{,}2\ \mathrm{dB}$ dla 36$\times$6 oraz
-$7{,}3\ \mathrm{dB}$ dla 1$\times$12 i~$3{,}0\ \mathrm{dB}$ dla 4$\times$12. Różnice są jednak
-większe niż ze wzoru~\eqref{eq:ott}. Trzykrotnie większa średnica powinna dać spadek
-o~$20\log_{10}3 = 9{,}5\ \mathrm{dB}$, a~zmierzono $27{,}7\ \mathrm{dB}$. Dziewięć razy więcej
-otworów powinno dać spadek o~$10\log_{10}9 = 9{,}5\ \mathrm{dB}$, a~zmierzono $16{,}1\ \mathrm{dB}$.
-Zmierzone wartości są też wyższe od obliczonych, np.\ dla przesłony 100$\times$1 przy
-$1\ \mathrm{GHz}$ wzór daje $3{,}5\ \mathrm{dB}$, a~zmierzono $44{,}0\ \mathrm{dB}$.
-Wzór~\eqref{eq:ott} jest tylko przybliżeniem i~daje wartości zaniżone~\cite[rozdz.~6]{ott}.
+Zgodnie z~teorią $SE$ maleje ze wzrostem średnicy i~liczby otworów, lecz silniej niż według
+wzoru~\eqref{eq:ott}. Przy $1\ \mathrm{GHz}$ (poniżej $f_g$ wszystkich porównywanych przesłon)
+trzykrotnie większa średnica (100$\times$1 i~100$\times$3) obniża $SE$ o~$30{,}2\ \mathrm{dB}$,
+a~dziewięciokrotnie większa liczba otworów (4$\times$6 i~36$\times$6) o~$22{,}0\ \mathrm{dB}$,
+wobec przewidywanych w~obu przypadkach $9{,}5\ \mathrm{dB}$. Zmierzone wartości przewyższają
+obliczone o~$3$--$40\ \mathrm{dB}$ (najbardziej dla 100$\times$1, 16$\times$2, 16$\times$3
+i~4$\times$6), ponieważ wzór opisuje szczelinę, a~przenikanie pola przez otwór kołowy jest
+znacznie mniejsze. Wysoka skuteczność przesłony 4$\times$6 (średnio $19{,}3\ \mathrm{dB}$, prawie
+jak 16$\times$3) może wynikać z~częściowego przysłonięcia jej otworów przez ramę dociskową,
+widocznego na rys.~\ref{fig:probki}e.
 
-Dla przesłony 100$\times$1 skuteczność ekranowania zbliża się do zakresu dynamiki na mniej niż
-$6\ \mathrm{dB}$ w~$30\%$ punktów, w~paśmie $0{,}8$--$2{,}1\ \mathrm{GHz}$ oraz powyżej
-$4{,}3\ \mathrm{GHz}$, gdzie zakres dynamiki maleje (rys.~\ref{fig:se-male}). Dla przesłony
-16$\times$2 dotyczy to $11\%$ punktów, a~dla 16$\times$3 $6\%$ punktów. W~tych punktach wynik
-jest ograniczony możliwościami stanowiska i~rzeczywista skuteczność ekranowania może być
-większa od zmierzonej. Dla pozostałych przesłon skuteczność leży wyraźnie poniżej zakresu
-dynamiki, więc wynik jest wiarygodny.
+Dla przesłony 100$\times$1, a~w~mniejszym stopniu 16$\times$2 i~16$\times$3, $SE$ miejscami
+osiąga lub przekracza $D$, głównie poniżej $2{,}1$ i~powyżej $4{,}3\ \mathrm{GHz}$
+(rys.~\ref{fig:se-male}). Odczyt $S_{12}$ odpowiada tam poziomowi szumu lub wycieku, więc
+rzeczywista skuteczność może być wyższa. Wyniki pozostałych przesłon leżą wyraźnie poniżej $D$
+i~są wiarygodne.
 
 % ---------------------------------------------------------------------
 \subsection{Skuteczność ekranowania szczelin}
@@ -788,7 +775,7 @@ dynamiki, więc wynik jest wiarygodny.
 \begin{table}[H]
   \centering
   \small
-  \caption{Skuteczność ekranowania szczelin o~szerokości $1{,}5$ i~$1{,}8\ \mathrm{cm}$ na tle
+  \caption{Skuteczność ekranowania szczeliny pionowej $1{,}5\ \mathrm{cm}$ i~poziomej $1{,}8\ \mathrm{cm}$ na tle
            zakresu dynamiki, dane nieuśrednione.}
   \label{tab:seszczeliny}
   \renewcommand{\arraystretch}{1.1}
@@ -803,7 +790,7 @@ dynamiki, więc wynik jest wiarygodny.
 \end{table}
 
 \paragraph{Przykład obliczeń do tabeli~\ref{tab:seszczeliny}.} Dla $f = 1{,}50\ \mathrm{GHz}$
-wartości $SE_{1,5}$ i~$SE_{1,8}$ obliczono ze wzoru~\eqref{eq:se} tak jak
+wartości $SE_{1,5}$ i~$SE_{1,8}$ obliczono ze wzoru~\eqref{eq:se} analogicznie jak
 w~tabeli~\ref{tab:seprzeslony}, a~różnica wynosi:
 \[
   \Delta SE = SE_{1,5} - SE_{1,8} = 46{,}93\ \mathrm{dB} - 31{,}91\ \mathrm{dB} = 15{,}02\ \mathrm{dB}
@@ -814,7 +801,7 @@ w~tabeli~\ref{tab:seprzeslony}, a~różnica wynosi:
   \centering
   \begin{tikzpicture}
     \begin{axis}[wykres, ylabel={Skuteczność ekranowania $SE$ [dB]}, ymin=0, ymax=70, legend columns=3,
-                 title={Skuteczność ekranowania szczelin $1{,}5$~cm i~$1{,}8$~cm}]
+                 title={Skuteczność ekranowania szczeliny pionowej $1{,}5$~cm i~poziomej $1{,}8$~cm}]
       \addplot[line width=1.4pt, black] table[x=f, y=Dg] {dane/wyniki.dat};
       \addlegendentry{zakres dynamiki $D$ wygł.}
       \addplot[line width=0.5pt, seriaA!45] table[x=f, y=SEsz15] {dane/wyniki.dat};
@@ -858,21 +845,24 @@ $0{,}8$--$2\ \mathrm{GHz}$, gdzie $K = 49$:
   = 37{,}69\ \mathrm{dB} \approx 37{,}7\ \mathrm{dB}.
 \]
 
-Szczelina o~szerokości $1{,}5\ \mathrm{cm}$ ekranuje średnio $35{,}1\ \mathrm{dB}$, a~szczelina
-o~szerokości $1{,}8\ \mathrm{cm}$ średnio $26{,}7\ \mathrm{dB}$. Węższa szczelina jest
-skuteczniejsza w~$90\%$ punktów, średnio o~$8{,}4\ \mathrm{dB}$. Największa różnica po
-wygładzeniu wynosi $15{,}4\ \mathrm{dB}$ przy $3{,}1\ \mathrm{GHz}$. Skuteczność obu szczelin
-maleje w~górnej części pasma, z~$37{,}7$ do $29{,}8\ \mathrm{dB}$ dla szczeliny $1{,}5\ \mathrm{cm}$
-i~z~$32{,}5$ do $21{,}8\ \mathrm{dB}$ dla szczeliny $1{,}8\ \mathrm{cm}$ między pasmami
-$0{,}8$--$2\ \mathrm{GHz}$ i~$4$--$5{,}8\ \mathrm{GHz}$.
+Skuteczność ekranowania szczeliny $1{,}5\ \mathrm{cm}$ wynosi średnio $35{,}1\ \mathrm{dB}$,
+a~szczeliny $1{,}8\ \mathrm{cm}$ $26{,}7\ \mathrm{dB}$. Szczelina pionowa $1{,}5\ \mathrm{cm}$ jest
+skuteczniejsza w~niemal całym badanym paśmie, średnio o~$8{,}4\ \mathrm{dB}$. Skuteczność obu
+szczelin maleje w~górnej części pasma, o~ok.~$8$--$11\ \mathrm{dB}$ między pasmami
+$0{,}8$--$2$ i~$4$--$5{,}8\ \mathrm{GHz}$.
 
-Szczelina jest dłuższa niż $\lambda/2 = 18{,}7\ \mathrm{cm}$ już przy $0{,}8\ \mathrm{GHz}$.
-Gdyby wektor $\vec E$ był prostopadły do szczeliny, jej skuteczność byłaby bliska
-$0\ \mathrm{dB}$. Zmierzone $27$--$35\ \mathrm{dB}$ oznacza, że szczeliny były ułożone
-równolegle do $\vec E$ i~liczy się ich szerokość. Wzór~\eqref{eq:ott} daje dla szerokości
-$1{,}8$ i~$1{,}5\ \mathrm{cm}$ różnicę $20\log_{10}(1{,}8/1{,}5) = 1{,}6\ \mathrm{dB}$, a~zmierzono
-średnio $8{,}4\ \mathrm{dB}$. Poniżej $2\ \mathrm{GHz}$ wynik szczeliny $1{,}5\ \mathrm{cm}$
-miejscami dochodzi do zakresu dynamiki (rys.~\ref{fig:szczeliny}).
+Przy polaryzacji pionowej szczelina pionowa jest równoległa do $\vec E$, a~pozioma
+prostopadła. Szczelina pozioma przerywa prądy indukowane w~ekranie, dlatego przepuszcza więcej
+energii. Sama różnica szerokości odpowiada według wzoru~\eqref{eq:ott}
+$20\log_{10}(1{,}8/1{,}5) = 1{,}6\ \mathrm{dB}$, więc większa część zmierzonej różnicy
+$8{,}4\ \mathrm{dB}$ wynika z~ułożenia szczelin. Szczelina pozioma zapewnia jednak średnio
+$26{,}7\ \mathrm{dB}$, tyle co przesłona 16$\times$2, podczas gdy dla szczeliny prostopadłej
+do $\vec E$ o~długości porównywalnej z~długością fali teoria przewiduje $SE$ bliskie
+$0\ \mathrm{dB}$. Przyjętego ułożenia szczelin nie można więc jednoznacznie potwierdzić.
+Wynik szczeliny $1{,}5\ \mathrm{cm}$ miejscami przekracza
+zakres dynamiki, głównie w~paśmie wycieku w~okolicy $2\ \mathrm{GHz}$ i~powyżej
+$4{,}3\ \mathrm{GHz}$ (rys.~\ref{fig:szczeliny}), więc w~tych punktach jest ograniczony
+stanowiskiem.
 
 % ---------------------------------------------------------------------
 \subsection{Porównanie szczeliny i~przesłon z~otworami}
@@ -883,10 +873,18 @@ o~podobnym wymiarze charakterystycznym: 16$\times$2 z~otworami o~średnicy $2\ \
 i~100$\times$1 z~otworami o~średnicy $1\ \mathrm{cm}$. Średnie wartości w~podpasmach podano
 w~tabeli~\ref{tab:pasma}.
 
+Skuteczność ekranowania szczeliny $1{,}5\ \mathrm{cm}$ jest średnio o~$9{,}0\ \mathrm{dB}$
+wyższa niż przesłony 16$\times$2 i~o~$2{,}1\ \mathrm{dB}$ wyższa niż przesłony 100$\times$1 (rys.~\ref{fig:porownanie}). Przewaga nad 16$\times$2 rośnie
+z~częstotliwością, od $2\ \mathrm{dB}$ poniżej $2\ \mathrm{GHz}$ do ok.~$11\ \mathrm{dB}$ powyżej.
+Przesłona 100$\times$1 przewyższa szczelinę jedynie w~najniższym paśmie, w~którym oba wyniki
+miejscami osiągają zakres dynamiki. Według wzoru~\eqref{eq:ott} długa szczelina powinna
+ekranować gorzej niż małe otwory. Uzyskany wynik wskazuje, że przy $\vec E$ równoległym do
+szczeliny o~przenikaniu pola decyduje jej szerokość, a~nie długość.
+
 \begin{figure}[htbp]
   \centering
   \begin{tikzpicture}
-    \begin{axis}[wykres, ylabel={Skuteczność ekranowania $SE$ [dB]}, ymin=0, ymax=60, legend columns=3,
+    \begin{axis}[wykres, height=7.2cm, ylabel={Skuteczność ekranowania $SE$ [dB]}, ymin=0, ymax=60, legend columns=4,
                  title={Porównanie szczeliny $1{,}5$~cm z~przesłonami 100$\times$1 i~16$\times$2, wygładzone}]
       \addplot[line width=1.4pt, black] table[x=f, y=Dg] {dane/wyniki.dat};
       \addlegendentry{zakres dynamiki $D$}
@@ -903,66 +901,51 @@ w~tabeli~\ref{tab:pasma}.
   \label{fig:porownanie}
 \end{figure}
 
-Szczelina $1{,}5\ \mathrm{cm}$ ekranuje średnio $35{,}1\ \mathrm{dB}$, czyli o~$9{,}0\ \mathrm{dB}$
-więcej niż przesłona 16$\times$2 i~o~$2{,}1\ \mathrm{dB}$ więcej niż przesłona 100$\times$1.
-Przewaga nad przesłoną 16$\times$2 rośnie z~częstotliwością i~wynosi $2{,}0\ \mathrm{dB}$
-w~paśmie $0{,}8$--$2\ \mathrm{GHz}$ oraz $11{,}2\ \mathrm{dB}$ w~pasmach $2$--$4\ \mathrm{GHz}$
-i~$4$--$5{,}8\ \mathrm{GHz}$. Przesłona 100$\times$1 jest skuteczniejsza od szczeliny tylko
-w~najniższym paśmie, gdzie daje $39{,}4\ \mathrm{dB}$ wobec $37{,}7\ \mathrm{dB}$, przy czym oba
-wyniki są tam ograniczone zakresem dynamiki wynoszącym $46{,}4\ \mathrm{dB}$. Powyżej
-$2\ \mathrm{GHz}$ szczelina przewyższa ją o~$2$--$4\ \mathrm{dB}$.
-
-Według wzoru~\eqref{eq:ott} o~ekranowaniu decyduje największy wymiar otworu, więc długa
-szczelina powinna ekranować gorzej niż małe otwory. Tak jednak nie jest, bo przy $\vec E$
-równoległym do szczeliny liczy się jej szerokość~\cite[rozdz.~6]{ott}. Po obróceniu szczeliny
-o~$90^\circ$ skuteczność byłaby bliska $0\ \mathrm{dB}$.
-
+\FloatBarrier
 \section{Wnioski}
 
 \begin{itemize}
-  \item Zakres dynamiki stanowiska wynosi średnio $43{,}3\ \mathrm{dB}$, a~po wygładzeniu od
-        $21{,}6$ do $56{,}9\ \mathrm{dB}$. W~paśmie $4$--$5{,}8\ \mathrm{GHz}$ spada do
-        $35{,}0\ \mathrm{dB}$, bo maleje poziom sygnału referencyjnego. W~$84\%$ punktów pomiar
-        dynamiki leży poniżej szumu analizatora $-85\ \mathrm{dB}$, więc zakres dynamiki
-        ogranicza głównie szum. Przeciek widać tylko w~paśmie $1{,}75$--$2{,}05\ \mathrm{GHz}$,
-        do $-71{,}3\ \mathrm{dB}$.
+  \item Zakres dynamiki wynosi średnio $43{,}3\ \mathrm{dB}$ i~maleje do $35{,}0\ \mathrm{dB}$
+        w~paśmie $4$--$5{,}8\ \mathrm{GHz}$. Ogranicza go szum analizatora, a~w~paśmie
+        $1{,}75$--$2{,}05\ \mathrm{GHz}$ wyciek przez nieszczelny montaż pełnej przesłony, co
+        potwierdza wpływ montażu na wynik. Zaleca się powtórzenie pomiaru po poprawie docisku
+        oraz pomiar szumu przy odłączonych antenach.
 
-  \item Skuteczność ekranowania przesłon maleje ze wzrostem częstotliwości, średnicy i~liczby
-        otworów, co zgadza się z~teorią. Dla przesłon 100$\times$1 i~100$\times$3 nachylenie
-        wynosi $-22{,}2$ i~$-17{,}4\ \mathrm{dB/dek.}$, blisko $-20\ \mathrm{dB/dek.}$ z~teorii.
-        Najlepsza jest przesłona 100$\times$1 (średnio $33{,}0\ \mathrm{dB}$), a~najsłabsze
-        16$\times$8 i~4$\times$12 ($2{,}6$ i~$3{,}0\ \mathrm{dB}$). Przy $1\ \mathrm{GHz}$
-        zmierzone wartości są o~$30$--$41\ \mathrm{dB}$ wyższe od obliczonych
-        wzorem~\eqref{eq:ott}, bo wzór daje wartości zaniżone.
+  \item $SE$ przesłon maleje ze wzrostem średnicy i~liczby otworów, a~poniżej $f_g$ także
+        częstotliwości. Najskuteczniejsza
+        jest przesłona 100$\times$1 ($33{,}0\ \mathrm{dB}$), najmniej skuteczne 16$\times$8
+        i~4$\times$12 ($2{,}6$ i~$3{,}0\ \mathrm{dB}$). Nachylenie dla 100$\times$1, 100$\times$3,
+        36$\times$6 i~16$\times$8 (od $-17{,}4$ do $-22{,}3\ \mathrm{dB/dek.}$) jest bliskie
+        teoretycznym $-20\ \mathrm{dB/dek.}$, dla 16$\times$2, 16$\times$3 i~4$\times$6 spadek jest
+        bardziej stromy. Wzór~\eqref{eq:ott} zaniża $SE$ o~$3$--$40\ \mathrm{dB}$, ponieważ
+        opisuje szczelinę, a~nie otwór kołowy.
 
-  \item Szczelina $1{,}5\ \mathrm{cm}$ ekranuje średnio $35{,}1\ \mathrm{dB}$, a~szczelina
-        $1{,}8\ \mathrm{cm}$ średnio $26{,}7\ \mathrm{dB}$. Węższa szczelina jest lepsza
-        w~$90\%$ punktów, co zgadza się z~teorią, ale różnica $8{,}4\ \mathrm{dB}$ jest większa
-        od $1{,}6\ \mathrm{dB}$ ze wzoru~\eqref{eq:ott}. Duże wartości $SE$ wynikają z~ułożenia
-        szczelin równolegle do wektora $\vec E$.
+  \item Szczelina pionowa $1{,}5\ \mathrm{cm}$ zapewnia średnio $35{,}1\ \mathrm{dB}$, a~pozioma
+        $1{,}8\ \mathrm{cm}$ $26{,}7\ \mathrm{dB}$. Różnica $8{,}4\ \mathrm{dB}$ znacznie przekracza
+        $1{,}6\ \mathrm{dB}$ wynikające z~samej różnicy szerokości, co odpowiada przyjętemu
+        ułożeniu szczelin, choć $SE$ szczeliny poziomej przewyższa wartość teoretyczną.
 
-  \item Szczelina $1{,}5\ \mathrm{cm}$ ekranuje lepiej niż przesłony 100$\times$1
-        i~16$\times$2, średnio o~$2{,}1$ i~$9{,}0\ \mathrm{dB}$. Wynika to z~polaryzacji,
-        bo przy $\vec E$ równoległym do szczeliny liczy się jej szerokość, a~nie długość.
-        Przy obróconej szczelinie wynik byłby bliski $0\ \mathrm{dB}$, dlatego szczeliny warto
-        mierzyć w~obu polaryzacjach.
+  \item Szczelina pionowa $1{,}5\ \mathrm{cm}$ przewyższa przesłony 100$\times$1 i~16$\times$2
+        średnio o~$2{,}1$ i~$9{,}0\ \mathrm{dB}$, mimo znacznie większej długości, ponieważ przy
+        $\vec E$ równoległym do szczeliny decyduje jej szerokość. Szczeliny należy badać w~obu
+        polaryzacjach.
 \end{itemize}
 
 % =====================================================================
+{\small
 \begin{thebibliography}{9}
+\setlength{\itemsep}{1pt}
 \bibitem{instr} M.~E.~Szafrańska, \emph{Instrukcja do ćwiczenia nr~1: Pomiar skuteczności
   ekranowania przesłon i~szczelin}, Laboratorium Kompatybilności Elektromagnetycznej
   i~Bezpieczeństwa Elektromagnetycznego, Katedra Telekomunikacji i~Teleinformatyki,
   Politechnika Wrocławska, Wrocław 2022.
-\bibitem{ieee299} \emph{IEEE Std 299-1997: IEEE Standard Method for Measuring the
-  Effectiveness of Electromagnetic Shielding Enclosures}, IEEE, New York 1998.
 \bibitem{ttr500} Tektronix, \emph{TTR500 Series Vector Network Analyzers, Datasheet},
   \url{https://www.tek.com/en/datasheet/vector-network-analyzers} (dostęp: 08.11.2026).
 \bibitem{ott} H.~W.~Ott, \emph{Electromagnetic Compatibility Engineering}, John Wiley \& Sons,
   Hoboken 2009, rozdz.~6: \emph{Shielding}.
-\bibitem{dane} D.~Kaliszuk, dane pomiarowe \emph{ekranowanie\_1\_8m\_V}, pliki Touchstone
-  \texttt{.s2p}, odległość anten $1{,}8\ \mathrm{m}$, polaryzacja pionowa, przekazane grupie~5
-  drogą elektroniczną, listopad 2026.
+\bibitem{dane} D.~Kaliszuk, dane pomiarowe \emph{ekranowanie\_1\_8m\_V} (\texttt{.s2p}),
+  odległość anten $1{,}8\ \mathrm{m}$, polaryzacja pionowa, listopad 2026.
 \end{thebibliography}
+}
 
 \end{document}
